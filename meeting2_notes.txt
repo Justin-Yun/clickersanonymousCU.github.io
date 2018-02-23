@@ -1,0 +1,25 @@
+Clickers Anonymous Meeting Log
+Meeting #2: 2/23/2018
+
+Persons in attendance:
+Thomas Langsfeld
+Graham Harper
+Christian Soto
+Justin Yun
+
+Discussed data base schema and game mechanics
+
+Data Base Ideas:
+	Login and Password
+	Database field to store number of clicks so users can save their game
+
+Game mechanics:
+	Click on apples to start
+	After 10 apples each click gets 2 apples
+	At 100 apples build a house with 5 people in it (each click generates 5 apples per house)
+	At 5000 apples get a town center (each click is worth 100 apples)
+	At 20000 apples get a hospital (each click worth 500 apples)
+	At 100000 apples get a university (each click worth 1000 apples)
+
+To do:
+	Learn SQL
