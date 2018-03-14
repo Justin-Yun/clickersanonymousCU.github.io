@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Clicker Anonymous - Login</title>
+
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAFQxVQ_cqkIl8qdTDE-PZlktv6U5hOLok",
+      authDomain: "clickersanonymouscu-6e7e5.firebaseapp.com",
+      databaseURL: "https://clickersanonymouscu-6e7e5.firebaseio.com",
+      projectId: "clickersanonymouscu-6e7e5",
+      storageBucket: "clickersanonymouscu-6e7e5.appspot.com",
+      messagingSenderId: "195611279987"
+    };
+    firebase.initializeApp(config);
+    </script>
+    
+    <link rel="icon" href="https://clickersanonymouscu-6e7e5.firebaseapp.com/assets/css/apple2.5_800.png" type="image/png" sizes="16x16">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
+
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: "applesclick.html",
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+  </head>
+  <body>
+    <!-- The surrounding HTML is left untouched by FirebaseUI.
+         Your app may use that space for branding, controls and other customizations.-->
+    <h1>Welcome!</h1>
+    <div id="firebaseui-auth-container"></div>
+  </body>
+</html>
