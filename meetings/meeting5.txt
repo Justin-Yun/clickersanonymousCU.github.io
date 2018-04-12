@@ -1,5 +1,5 @@
 Attendees: Quinn, Story, Graham, Justin
-
 Date: 4/5/18
+Time: 5pm
 
 Discussed Milestone 4 and spoke about changing our hosting site to Github instead of firebase.
