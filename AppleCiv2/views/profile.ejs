@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!-- saved from url=(0130)https://sulfurous.aau.at/html/app.html?id=207481715&turbo=false&full-screen=true&aspect-x=4&aspect-y=3&resolution-x=&resolution-y= -->
+<html class="wf-donegalone-n4-active wf-gloriahallelujah-n4-active wf-permanentmarker-n4-active wf-mysteryquest-n4-active wf-active">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Clicker Anonymous - Game</title>
+    <link rel="icon" href="https://clickersanonymouscu-6e7e5.firebaseapp.com/assets/css/apple2.5_800.png" sizes="32x32">
+    <link rel="stylesheet" href="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/app.css">
+    <link rel="stylesheet" href="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/main.css" media="all">
+
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-messaging.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyAFQxVQ_cqkIl8qdTDE-PZlktv6U5hOLok",
+    authDomain: "clickersanonymouscu-6e7e5.firebaseapp.com",
+    databaseURL: "https://clickersanonymouscu-6e7e5.firebaseio.com",
+    projectId: "clickersanonymouscu-6e7e5",
+    storageBucket: "clickersanonymouscu-6e7e5.appspot.com",
+    messagingSenderId: "195611279987"
+    };
+    firebase.initializeApp(config);
+    </script>
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
+    <script type="text/javascript">
+    initApp = function() {
+      firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        user.getIdToken().then(function(accessToken) {
+          document.getElementById('sign-in-status').textContent = 'Signed in';
+          document.getElementById('sign-in').textContent = 'Sign out';
+          document.getElementById('account-details').textContent = JSON.stringify({
+            displayName: displayName,
+            email: email,
+            emailVerified: emailVerified,
+            photoURL: photoURL,
+            uid: uid,
+            accessToken: accessToken,
+            providerData: providerData
+          }, null, '  ');
+        });
+      } else {
+        // User is signed out.
+        document.getElementById('sign-in-status').textContent = 'Signed out';
+        document.getElementById('sign-in').textContent = 'Sign in';
+        document.getElementById('account-details').textContent = 'null';
+        }
+      }, function(error) {
+          console.log(error);
+        });
+      };
+
+      window.addEventListener('load', function() {
+        initApp()
+        console.log(document.getElementById('sign-in-status').textContent);
+    });
+    </script>
+    <script type="text/javascript">
+      if (document.getElementById('sign-in-status').textContent == 'Signed out') {
+        window.location.replace("https://clickersanonymouscu-6e7e5.firebaseapp.com/index.html");
+      }
+    </script>
+    </head>
+    <body>
+			<div id= "buttons">
+				<br>
+				<a href = "/logout"style = "color:white" ><button>Logout </button></a> <br><br>
+				<a href = "/leaderboard" style = "color:white"><button>Leaderboard </button></a><br><br>
+					<a href = "/about" style = "color:white"><button>Learn More </button></a>
+
+			</div>
+
+    <div class="player" style="left: 249px; top: 0px;"><div style="position: absolute; overflow: hidden; width: 868px; height: 651px; font-size: 18.0833px; background: rgb(255, 255, 255); user-select: none; transform: translateZ(0px);"><canvas width="868" height="651" id="backdropCanvas" style="position: absolute; width: 868px; height: 651px;"></canvas><canvas width="933" height="700" id="penCanvas" style="position: absolute; width: 868px; height: 651px;"></canvas><canvas width="868" height="651" id="canvas" tabindex="0" style="outline: none; position: absolute; width: 868px; height: 651px;"></canvas><canvas width="480" height="360" id="glCollisionCanvas" style="display: none; position: absolute; width: 868px; height: 651px;"></canvas><div style="z-index: 1; pointer-events: auto; position: absolute; right: 1.4em; left: 1.4em; bottom: 0.6em; padding: 0.5em 3em 0.5em 0.5em; border: 0.3em solid rgb(46, 174, 223); border-radius: 0.8em; background: rgb(255, 255, 255); display: none;"><div style="cursor: default; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 1.3em; line-height: normal; font-family: sans-serif; margin: 0px -1.92308em 0.384615em 0px; white-space: pre; overflow: hidden; text-overflow: ellipsis;"></div><input style="border: 0px; background: rgb(238, 238, 238); box-sizing: border-box; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 1.3em; line-height: normal; font-family: sans-serif; padding: 0px 0.230769em; outline: 0px; margin: 0px; width: 100%; height: 1.53846em; display: block; border-radius: 0px; box-shadow: rgba(0, 0, 0, 0.2) 0.0769231em 0.0769231em 0.153846em inset, rgba(255, 255, 255, 0.2) -0.0769231em -0.0769231em 0.0769231em inset; -webkit-appearance: none;"><div style="width: 2.2em; height: 2.2em; position: absolute; right: 0.4em; bottom: 0.4em; background: url(&quot;/img/icons.svg&quot;) -16.5em -3.7em / 32em 9.6em;"></div></div></div></div>
+    <div class="splash" style="display: none;">
+    <div>
+    <h1>Clickers Anonymous - Game</h1>
+    <div class="progress"><div class="progress-bar" style="width: 100%;"></div></div>
+    <p id="fullscreenWarning"></p>
+    </div>
+    </div>
+    <div class="error">
+    <div>
+    <h1>sulfurous</h1>
+    <p>An error has occurred. <a id="bug-link" href="https://github.com/mittagskogel/sulfurous/issues/new">Click here</a> to file a bug report on GitHub.</p>
+    </div>
+    </div>
+    <div class="webgl-error">
+    <div>
+    <h1>sulfurous</h1>
+    <p>It looks like your device doesn't support WebGL. You can try viewing this project in the legacy player <a id="legacy-link" href="https://sulfurous.aau.at/legacy">here</a>.</p>
+    </div>
+    </div>
+
+    <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/webfont.js" type="text/javascript" async=""></script>
+    <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/fonts.js"></script>
+    <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/jszip.js"></script>
+    <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/gl-matrix-min.js"></script>
+    <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/phosphorus.js"></script>
+    <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/shaders.js"></script>
+    <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/fonts1.js"></script>
+
+    <script>
+    (function () {
+    'use strict';
+
+    /*
+    if (location.protocol === 'https:') {
+    location.replace(('' + location).replace(/^https:/, 'https:'));
+    }
+    */
+
+    var stage;
+
+    var projectId = 207481715;
+    var projectTitle = '';
+    var turbo = false;
+    var fullScreen = true;
+    var aspectX = 4;
+    var aspectY = 3;
+    var resolutionX = 480;
+    var resolutionY = 360;
+
+    var params = location.search.substr(1).split('&');
+    params.forEach(function(p) {
+    var parts = p.split('=');
+    if (parts.length > 1) {
+    switch (parts[0]) {
+    case 'id':
+    projectId = Number(parts[1]);
+    break;
+    case 'turbo':
+    turbo = parts[1] !== 'false';
+    break;
+    case 'full-screen':
+    fullScreen = parts[1] !== 'false';
+    break;
+    case 'aspect-x':
+    aspectX = Number(parts[1]);
+    break;
+    case 'aspect-y':
+    aspectY = Number(parts[1]);
+    break;
+    case 'resolution-x':
+    resolutionX = Number(parts[1]);
+    break;
+    case 'resolution-y':
+    resolutionY = Number(parts[1]);
+    break;
+    default:
+    console.log('Skipping unknown option: ' + parts[0] + '=' + parts[1]);
+    }
+    }
+    });
+
+    P.resolution = resolutionX;
+
+    var splash = document.querySelector('.splash');
+    var progressBar = document.querySelector('.progress-bar');
+    var error = document.querySelector('.error');
+    var bugLink = document.querySelector('#bug-link');
+    var webGLError = document.querySelector('.webgl-error');
+    var legacyLink = document.querySelector('#legacy-link');
+    var player = document.querySelector('.player');
+
+    var stage;
+
+    function layout() {
+    if (!stage) return;
+    var w = Math.min(window.innerWidth, window.innerHeight * aspectX / aspectY);
+    if (!fullScreen) w = resolutionX;
+    var h = w * aspectY / aspectX;
+    if (!fullScreen) h = resolutionY;
+    player.style.left = (window.innerWidth - w) / 2 + 'px';
+    player.style.top = (window.innerHeight - h) / 2 + 'px';
+    stage.setZoom(w / 480, h / 360);
+    stage.draw();
+    }
+
+    function mobileFullScreen(e){
+    if(e) e.preventDefault();
+    document.documentElement.classList.toggle('fs');
+
+    if(!e){
+    var el = document.documentElement;
+    if (el.requestFullScreenWithKeys) {
+    el.requestFullScreenWithKeys();
+    } else if (el.webkitRequestFullScreen) {
+    el.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+    } else if (el.mozRequestFullScreen){
+    el.mozRequestFullScreen();
+    }	else{
+    console.warn('No full screen available.');
+    }
+    }
+    updateFullScreen();
+    }
+
+    function updateFullScreen() {
+    if (!stage) return;
+
+    resolutionX = !resolutionX ? 480 : resolutionX;
+    resolutionY = !resolutionY ? 360 : resolutionY;
+
+    window.scrollTo(0, 0);
+    var padding = 8;
+    var w = window.innerWidth - padding * 2;
+    var h = window.innerHeight - padding;
+    w = Math.min(w, h * resolutionX / resolutionY);
+    h = w * resolutionY / resolutionX;
+    document.body.style.width = w + 'px';
+    document.body.style.height = h + 'px';
+    document.body.style.marginLeft = (window.innerWidth - w) / 2 + 'px';
+    document.body.style.marginTop =  (window.innerHeight - h + padding) / 2 + 'px';
+    stage.setZoom(w / 480, w * resolutionY / resolutionX / 360);
+    }
+
+
+    if(P.hasTouchEvents){
+    window.addEventListener('load', function() {
+    document.getElementById('fullscreenWarning').textContent = 'On mobile browsers, use two finger tap in portrait orientation and turn to landscape orientation for full screen.';
+    });
+
+    document.addEventListener('touchstart', function(e) {
+    if(e.targetTouches.length >= 2)
+    mobileFullScreen(e);
+    });
+    }
+
+    function showError(e) {
+    error.style.display = 'table';
+    bugLink.href = 'https://github.com/mittagskogel/sulfurous/issues/new?title=' + encodeURIComponent(projectTitle || '') + '&body=' + encodeURIComponent('\n\n\nhttps://scratch.mit.edu/projects/' + projectId + '\nhttps://newton.nes.aau.at/~sulfurous/#' + projectId + (e.stack ? '\n\n```\n' + e.stack + '\n```' : ''));
+    console.error(e.stack);
+    }
+
+    function showWebGLError(e) {
+    webGLError.style.display = 'table';
+    legacyLink.href = location;
+    legacyLink.href = legacyLink.href.replace('html', 'legacy/html');
+    console.error(e);
+    }
+
+    window.addEventListener('resize', layout);
+
+    if (P.hasTouchEvents) {
+    document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    });
+    }
+
+    var request = P.IO.loadScratchr2Project(projectId);
+
+    request.onload = function (s) {
+    splash.style.display = 'none';
+
+    stage = s;
+    layout();
+
+    s.isTurbo = turbo;
+    s.start();
+    s.triggerGreenFlag();
+
+    player.appendChild(s.root);
+    s.focus();
+    s.handleError = showError;
+    };
+    request.onerror = showError;
+    request.onprogress = function (e) {
+    progressBar.style.width = (10 + e.loaded / e.total * 90) + '%';
+    };
+
+    P.IO.loadScratchr2ProjectTitle(projectId, function(title) {
+    document.title = projectTitle = title;
+    });
+
+    P.showWebGLError = showWebGLError;
+
+    }());
+
+    </script>
+  </body>
+</html>

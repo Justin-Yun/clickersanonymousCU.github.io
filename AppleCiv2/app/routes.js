@@ -5,7 +5,7 @@ module.exports = function(app, passport) {
 	// HOME PAGE (with login links) ========
 	// =====================================
 	app.get('/', function(req, res) {
-		res.render('login.ejs'); // load the login.ejs file
+		res.render('index.ejs'); // load the index.ejs file
 	});
 
 	// =====================================
@@ -20,7 +20,7 @@ module.exports = function(app, passport) {
 
 	// process the login form
 	app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/', // redirect to the secure gamePage section
+            successRedirect : '/profile', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
 		}),
@@ -46,21 +46,37 @@ module.exports = function(app, passport) {
 
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/gamePage', // redirect to the secure gamePage section
+		successRedirect : '/profile', // redirect to the secure profile section
 		failureRedirect : '/signup', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
 
 	// =====================================
-	// gamePage SECTION =========================
+	// PROFILE SECTION =========================
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
-	app.get('/gamePage', isLoggedIn, function(req, res) {
-		res.render('gamePage.ejs', {
+	app.get('/profile', isLoggedIn, function(req, res) {
+		res.render('profile.ejs', {
 			user : req.user // get the user out of session and pass to template
 		});
 	});
+
+	//Leaderboard
+
+	app.get('/leaderboard', isLoggedIn, function(req, res){
+		res.render('leaders.ejs', {
+			user:req.user
+		})
+	})
+
+	//about PAGE
+
+	app.get('/about', isLoggedIn, function(req, res){
+		res.render('about.ejs', {
+			user:req.user
+		})
+	})
 
 	// =====================================
 	// LOGOUT ==============================
@@ -70,6 +86,8 @@ module.exports = function(app, passport) {
 		res.redirect('/');
 	});
 };
+
+
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
