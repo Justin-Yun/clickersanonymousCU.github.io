@@ -1,10 +1,10 @@
 // config/database.js
 module.exports = {
     'connection': {
-        'host': 'localhost',
-        'user': 'root',
-        'password': 'password' //need a database and password
+        'host': 'tuy8t6uuvh43khkk.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'user': 'ug8askrl9c7389ct',
+        'password': 'zr1ef3gabpuccgdi' 
     },
-	'database': 'my_schema', // need a database and password
+	'database': 'caclick_db', 
     'users_table': 'UserInfo' 
 };
