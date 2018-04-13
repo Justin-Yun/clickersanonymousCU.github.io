@@ -1,0 +1,9 @@
+Attendees: Story, Quinn, Justin, Graham
+Date: 4/12/18
+Time: 5pm
+
+Went over Milestone 5. 
+
+Spoke about moving over to Heroku and switching our methods around. Talked about priorities and what our flow of development is going
+to look like from now to the end of the semester. Went over the template we are starting with so that everyone is on the same page. Talked
+about some possible changes to the complexity of the game itself.
