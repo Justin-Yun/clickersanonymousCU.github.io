@@ -1,4 +1,10 @@
 // app/routes.js
+var mysql = require('mysql');
+var dbconfig = require('../config/database.js');
+
+var connection = mysql.createConnection(dbconfig.connection);
+connection.query('USE ' + dbconfig.database);
+
 module.exports = function(app, passport) {
 
 	// =====================================
@@ -65,8 +71,19 @@ module.exports = function(app, passport) {
 	//Leaderboard
 
 	app.get('/leaderboard', isLoggedIn, function(req, res){
-		res.render('leaders.ejs', {
-			user:req.user
+		var sqlQuery = "SELECT username, apple_count AS score FROM users ORDER BY apple_count DESC LIMIT 25;";
+		console.log(sqlQuery);
+		connection.query(sqlQuery, function(err, rows){
+			if(err){
+				console.log(err)
+			}
+			else{
+				console.log(rows);
+				res.render('leaders.ejs', {
+					user:req.user,
+					data:rows
+				})
+			}
 		})
 	})
 
