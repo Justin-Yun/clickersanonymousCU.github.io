@@ -1,0 +1,6 @@
+Attendees: Story, Christian, Graham
+Date: 4/19/18
+Time: 5pm
+
+Worked to finish Milestone 5, messed around with the automated testing software to get our test cases working. Talked about the website and
+its implementation and appearance. Updated everyone on what everyone else is doing. 
