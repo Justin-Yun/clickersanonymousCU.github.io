@@ -7,7 +7,10 @@ var session  = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var path = require('path');
+
 var app      = express();
+
 var port     = process.env.PORT || 8080;
 
 var passport = require('passport');
@@ -27,6 +30,8 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 

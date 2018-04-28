@@ -31,8 +31,6 @@ module.exports = function(app, passport) {
             failureFlash : true // allow flash messages
 		}),
         function(req, res) {
-            console.log("hello");
-
             if (req.body.remember) {
               req.session.cookie.maxAge = 1000 * 60 * 3;
             } else {
@@ -63,9 +61,23 @@ module.exports = function(app, passport) {
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/profile', isLoggedIn, function(req, res) {
-		res.render('profile.ejs', {
-			user : req.user // get the user out of session and pass to template
-		});
+		var sqlQuery = "SELECT apple_count, auto_clicker, wheat, house, company from users where username = '"+req.user.username+"'"
+		connection.query(sqlQuery, function(err, rows){
+			if(err){
+				console.log(err)
+			}
+			else{
+				console.log(rows)
+				res.render('profile.ejs', {
+					user : req.user,
+					apples: rows[0].apple_count,
+					autoclicker: rows[0].auto_clicker,
+					wheat:rows[0].wheat,
+					house:rows[0].house,
+					company:rows[0].company
+				});
+			}
+		})
 	});
 
 	//Leaderboard
@@ -102,6 +114,27 @@ module.exports = function(app, passport) {
 		req.logout();
 		res.redirect('/');
 	});
+
+
+	app.post('/save', function(req,res){
+		console.log("SAVE CALLED with "+req.body.apple_count)
+		var sqlQuery = "update users SET apple_count = "+req.body.apple_count +", auto_clicker = "+req.body.autoclicker+", wheat = "+req.body.wheat+", house = "+req.body.house+", company = "+req.body.company+" WHERE username = '"+req.user.username+"';"
+		connection.query(sqlQuery, function(err,rows){
+			if(err){
+				console.log(err)
+			}
+			else{
+				res.render('profile.ejs', {
+					user:req.user,
+					apples:req.body.apple_count,
+					autoclicker:req.body.autoclicker,
+					wheat:req.body.wheat,
+					house:req.body.house,
+					company:req.body.company
+				})
+			}
+		})
+	})
 };
 
 

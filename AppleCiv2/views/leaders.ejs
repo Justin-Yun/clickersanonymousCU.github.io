@@ -1,7 +1,16 @@
 <!-- views/leaders.ejs -->
 
 <head>
+  <title>Leaderboard</title>
+
   <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background-color: gray;
+      margin-top: -8px;
+    }
+
     table {
       margin-top: 45px;
       font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -30,14 +39,45 @@
       background-color: #ddd;
     }
 
-    a {
-      margin-left: auto;
-      margin-right: auto;
+    .container {
+      position: absolute;
+      left: 35%;
+      display: flex;
+      overflow: hidden;
+      background-color: #333;
+      margin-top: 0px;
+      width: 30%;
+      height: 50px;
+      z-index: 1;
+    }
+
+    .container a {
+      color: #f2f2f2;
+      text-align: center;
+      text-decoration: none;
+      font-size: 25px;
+
+      padding-top: 12.5px;
+      padding-bottom: 12.5px;
+    }
+
+    .container a:hover {
+      background: #ddd;
+      color: black;
     }
   </style>
 </head>
 
 <body>
+  <nav>
+    <ul class="container">
+      <a href="/profile">Home|</a>
+      <a href="/leaderboard">Leaderboard|</a>
+      <a href="/about">About|</a>
+      <a href="/logout">Log Out</a>
+
+    </ul>
+  </nav>
   <h1 style="text-align:center">Here's the leaderboard! </h1>
   <table>
     <tr>
@@ -63,9 +103,6 @@
       })
     } %>
   </table>
-  <div>
-    <a href="/profile"><button>Go Home</button></a>
-  </div>
 </body>
 
 <!-- needs work -->

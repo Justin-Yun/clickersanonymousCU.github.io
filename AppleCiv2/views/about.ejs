@@ -2,19 +2,76 @@
 <html>
 
 <head>
-	<title>About Game Page</title>
+	<title>Apple Game Page</title>
+	<style>
+		body {
+			text-align: center;
+			font-family: Arial;
+			background-color: gray;
+			margin-top: -8px;
+		}
+
+		.container {
+			position: absolute;
+			left: 35%;
+			display: flex;
+			overflow: hidden;
+			background-color: #333;
+			margin-top: -8px;
+			width: 30%;
+			height: 50px;
+			z-index: 1;
+		}
+
+		.container a {
+			color: #f2f2f2;
+			text-align: center;
+			text-decoration: none;
+			font-size: 25px;
+
+			padding-top: 12.5px;
+			padding-bottom: 12.5px;
+		}
+
+		.container a:hover {
+			background: #ddd;
+			color: black;
+		}
+
+		nav {
+			position: absolute;
+			top: 0px;
+			left: -0.1%;
+			width: 100%;
+		}
+
+		div {
+			width: 70%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
 </head>
 
-<h1>About Game</h1>
-
 <body>
-	<p>Apple Click is a click based incremental game. The goal of the game is to build a civilization by accumulating apples to feed your population. As your apple stock increases so does your population and new buildings for your civilization will become available
-		furthering your ability to collect more and more apples and grow your town! Have fun and happy clicking!!</p>
+	<nav>
+		<ul class="container">
+			<a href="/profile">Home|</a>
+			<a href="/leaderboard">Leaderboard|</a>
+			<a href="/about">About|</a>
+			<a href="/logout">Log Out</a>
+
+		</ul>
+	</nav>
+	<br><br>
+	<h1>About Game</h1>
 
 	<div>
-		<a href="/profile"><button>Go Home</button></a>
+		<p>Apple Click is a click based incremental game. The goal of the game is to build a civilization by accumulating apples to feed your population. As your apple stock increases so does your population and new buildings for your civilization will become
+			available furthering your ability to collect more and more apples and grow your town! Have fun and happy clicking!!</p>
 	</div>
-</body>
 
+
+</body>
 
 </html>

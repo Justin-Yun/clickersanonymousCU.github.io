@@ -1,252 +1,283 @@
-<!DOCTYPE html>
-<!-- saved from url=(0130)https://sulfurous.aau.at/html/app.html?id=207481715&turbo=false&full-screen=true&aspect-x=4&aspect-y=3&resolution-x=&resolution-y= -->
-<html class="wf-donegalone-n4-active wf-gloriahallelujah-n4-active wf-permanentmarker-n4-active wf-mysteryquest-n4-active wf-active">
+<html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <title>Clicker Anonymous - Game</title>
-  <link rel="icon" href="https://clickersanonymouscu-6e7e5.firebaseapp.com/assets/css/apple2.5_800.png" sizes="32x32">
-  <link rel="stylesheet" href="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/app.css">
-  <link rel="stylesheet" href="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/main.css" media="all">
+  <meta charset="UTF-8">
+  <script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
+  <script language="javascript" src="../libraries/p5.dom.js"></script>
+  <script language="javascript" src="../libraries/p5.sound.js"></script>
+  <!-- <script language="javascript" type="text/javascript" src="../sketch.js"></script> -->
 
-
-  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
-  <script type="text/javascript">
-    if (document.getElementById('sign-in-status').textContent == 'Signed out') {
-      window.location.replace("https://clickersanonymouscu-6e7e5.firebaseapp.com/index.html");
+  <title>Apple Clicking Game</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/clickersanonymousCU/clickersanonymousCU.github.io/master/graphics/Apple2.5_800.png">
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background-color: gray;
+      margin-top: -8px;
     }
-  </script>
+
+    .container {
+      position: absolute;
+      left: 35%;
+      display: flex;
+      overflow: hidden;
+      background-color: #333;
+      margin-top: 0px;
+      width: 30%;
+      height: 50px;
+      z-index: 1;
+    }
+
+    .container a {
+      color: #f2f2f2;
+      text-align: center;
+      text-decoration: none;
+      font-size: 25px;
+
+      padding-top: 12.5px;
+      padding-bottom: 12.5px;
+    }
+
+    .container a:hover {
+      background: #ddd;
+      color: black;
+    }
+  </style>
 </head>
 
 <body>
+  <nav>
+    <ul class="container">
+      <a href="/profile">Home|</a>
+      <a href="/leaderboard">Leaderboard|</a>
+      <a href="/about">About|</a>
+      <a href="/logout">Log Out</a>
+
+    </ul>
+  </nav>
+
+  <div id="sketch-holder">
+  </div>
+  <p>&copy; ClickerAnonymous 2018</p>
+
   <div id="buttons">
-    <br>
-    <a href="/logout" style="color:white"><button>Logout </button></a> <br><br>
-    <a href="/leaderboard" style="color:white"><button>Leaderboard </button></a><br><br>
-    <a href="/about" style="color:white"><button>Learn More </button></a>
+    <form action="/save" method="POST">
+      <input type="hidden" type="number" value="<%=apples%>" name="apple_count" id="apples" />
+      <input type="hidden" value="<%=autoclicker%>" name="autoclicker" id="autoclicker" />
+      <input type="hidden" value="<%=wheat%>" name="wheat" id="wheat" />
+      <input type="hidden" value="<%=house%>" name="house" id="house" />
+      <input type="hidden" value="<%=company%>" name="company" id="company" />
+      <input type="submit" value="Save" />
+    </form>
   </div>
-
-  <div class="player" style="left: 249px; top: 0px;">
-    <div style="position: absolute; overflow: hidden; width: 868px; height: 651px; font-size: 18.0833px; background: rgb(255, 255, 255); user-select: none; transform: translateZ(0px);"><canvas width="868" height="651" id="backdropCanvas" style="position: absolute; width: 868px; height: 651px;"></canvas><canvas width="933" height="700" id="penCanvas" style="position: absolute; width: 868px; height: 651px;"></canvas><canvas width="868"
-        height="651" id="canvas" tabindex="0" style="outline: none; position: absolute; width: 868px; height: 651px;"></canvas><canvas width="480" height="360" id="glCollisionCanvas" style="display: none; position: absolute; width: 868px; height: 651px;"></canvas>
-      <div style="z-index: 1; pointer-events: auto; position: absolute; right: 1.4em; left: 1.4em; bottom: 0.6em; padding: 0.5em 3em 0.5em 0.5em; border: 0.3em solid rgb(46, 174, 223); border-radius: 0.8em; background: rgb(255, 255, 255); display: none;">
-        <div style="cursor: default; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 1.3em; line-height: normal; font-family: sans-serif; margin: 0px -1.92308em 0.384615em 0px; white-space: pre; overflow: hidden; text-overflow: ellipsis;"></div><input style="border: 0px; background: rgb(238, 238, 238); box-sizing: border-box; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 1.3em; line-height: normal; font-family: sans-serif; padding: 0px 0.230769em; outline: 0px; margin: 0px; width: 100%; height: 1.53846em; display: block; border-radius: 0px; box-shadow: rgba(0, 0, 0, 0.2) 0.0769231em 0.0769231em 0.153846em inset, rgba(255, 255, 255, 0.2) -0.0769231em -0.0769231em 0.0769231em inset; -webkit-appearance: none;">
-        <div style="width: 2.2em; height: 2.2em; position: absolute; right: 0.4em; bottom: 0.4em; background: url(&quot;/img/icons.svg&quot;) -16.5em -3.7em / 32em 9.6em;"></div>
-      </div>
-    </div>
-  </div>
-  <div class="splash" style="display: none;">
-    <div>
-      <h1>Clickers Anonymous - Game</h1>
-      <div class="progress">
-        <div class="progress-bar" style="width: 100%;">
-        </div>
-      </div>
-      <p id="fullscreenWarning"></p>
-    </div>
-  </div>
-  <div class="error">
-    <div>
-      <h1>sulfurous</h1>
-      <p>An error has occurred. <a id="bug-link" href="https://github.com/mittagskogel/sulfurous/issues/new">Click here</a> to file a bug report on GitHub.</p>
-    </div>
-  </div>
-  <div class="webgl-error">
-    <div>
-      <h1>sulfurous</h1>
-      <p>It looks like your device doesn't support WebGL. You can try viewing this project in the legacy player <a id="legacy-link" href="https://sulfurous.aau.at/legacy">here</a>.</p>
-    </div>
-  </div>
-
-  <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/webfont.js" type="text/javascript" async=""></script>
-  <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/fonts.js"></script>
-  <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/jszip.js"></script>
-  <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/gl-matrix-min.js"></script>
-  <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/phosphorus.js"></script>
-  <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/shaders.js"></script>
-  <script src="https://clickersanonymouscu-6e7e5.firebaseapp.com/ClickerAnonymous_files/fonts1.js"></script>
 
   <script>
-    (function() {
-      'use strict';
+    var bg;
+    var appleImg;
+    var handImg;
+    var wheatImg;
+    var houseImg;
+    var barnImg;
+    var collected;
+    var applesPerS;
+    var AC;
+    var WH;
+    var HO;
+    var CO;
+    var reqAC;
+    var reqWH;
+    var reqHO;
+    var reqCO;
+    var secs = setInterval(dApples, 1000);
 
-      /*
-      if (location.protocol === 'https:') {
-      location.replace(('' + location).replace(/^https:/, 'https:'));
+    function setup() {
+      var canvas = createCanvas(1080, 540);
+      handImg = loadImage("https://raw.githubusercontent.com/clickersanonymousCU/clickersanonymousCU.github.io/master/graphics/hand-o-pointer.png");
+      wheatImg = loadImage("https://raw.githubusercontent.com/clickersanonymousCU/clickersanonymousCU.github.io/master/graphics/wheat800.png");
+      houseImg = loadImage("https://raw.githubusercontent.com/clickersanonymousCU/clickersanonymousCU.github.io/master/graphics/house.png");
+      barnImg = loadImage("https://raw.githubusercontent.com/clickersanonymousCU/clickersanonymousCU.github.io/master/graphics/barn%20scaled.png");
+      bg = loadImage("https://raw.githubusercontent.com/clickersanonymousCU/clickersanonymousCU.github.io/master/graphics/BG.jpg");
+      canvas.parent('sketch-holder');
+      collected = document.getElementById("apples");
+      AC = document.getElementById("autoclicker");
+      WH = document.getElementById("wheat");
+      HO = document.getElementById("house");
+      CO = document.getElementById("company");
+      reqAC = 10;
+      reqWH = 50;
+      reqHO = 100;
+      reqCO = 1000;
+      scene = ['menu', 'game'];
+      scene['menu'] = true;
+    }
+
+    function canvasProperties() {
+      background(bg);
+    }
+
+
+    function draw() {
+      if (scene['menu'] == true) {
+        cursor(HAND);
+        canvasProperties();
+        textSize(60);
+        fill(255);
+        textAlign(CENTER);
+        text("Get 'em Apples!", width / 2, height / 2);
+        textSize(15);
+        text("Click to start.", width / 2, (height / 5) * 4);
+        if (mouseIsPressed) {
+          clear();
+          scene['game'] = true;
+          cursor(ARROW);
+        }
       }
-      */
+      if (scene['game'] == true) {
+        canvasProperties();
+        scene['menu'] = false;
+        appleImg = createImg("https://raw.githubusercontent.com/clickersanonymousCU/clickersanonymousCU.github.io/master/graphics/Apple2.5_800.png");
+        appleImg.size(appleImg.width / 4, appleImg.height / 4);
+        //appleImg.position(580, 225);
+        appleImg.center();
+        appleImg.mousePressed(appleClicked);
+        fill(225);
+        rect(25, (canvas.height / 7), 300, 100);
+        rect(700, (canvas.height / 7), 350, 390);
+        //upgrades buttons
+        var col = color(25, 23, 200, 50);
+        //autoclicker button
+        rect(700, (canvas.height / 7) * 2, 350, 80);
+        image(handImg, 720, 165, handImg.width / 9, handImg.height / 9);
+        ACButton = createButton(abbreviateNumber(reqAC));
+        ACButton.style('background-color', col);
+        ACButton.size(40, 30);
+        ACButton.position(1153, 200);
+        ACButton.mousePressed(ACClicked);
+        //wheat button
+        rect(700, (canvas.height / 7) * 3, 350, 80);
+        image(wheatImg, 715, 225, wheatImg.width / 12, wheatImg.height / 12);
+        WHButton = createButton(abbreviateNumber(reqWH));
+        WHButton.style('background-color', col);
+        WHButton.size(40, 30);
+        WHButton.position(1153, 280);
+        WHButton.mousePressed(WHClicked);
+        //house button
+        rect(700, (canvas.height / 7) * 4, 350, 80);
+        image(houseImg, 710, 320, houseImg.width / 8, houseImg.height / 8);
+        HOButton = createButton(abbreviateNumber(reqHO));
+        HOButton.style('background-color', col);
+        HOButton.size(40, 30);
+        HOButton.position(1153, 355);
+        HOButton.mousePressed(HOClicked);
+        //company button
+        rect(700, (canvas.height / 7) * 5, 350, 80);
+        image(barnImg, 705, 390, barnImg.width / 12, barnImg.height / 12);
+        COButton = createButton(abbreviateNumber(reqCO));
+        COButton.style('background-color', col);
+        COButton.size(40, 30);
+        COButton.position(1153, 434);
+        COButton.mousePressed(COClicked);
+        textSize(35);
+        fill(0);
+        textAlign(LEFT);
+        text("Collected:", 40, 115);
+        var col_val = Number(collected.value)
+        text(abbreviateNumber(col_val.toFixed(1)), 235, 115);
+        text("Apples/Sec:", 40, 155);
+        text(abbreviateNumber(applesPerS.toFixed(1)), 235, 155);
+        text("UPGRADES:", 770, 115);
+        textSize(10);
+        text("APPLIED: AC=            WH=            HO=            CO=            ", 760, 145);
+        text(abbreviateNumber(AC.value), 840, 145);
+        text(abbreviateNumber(WH.value), 895, 145);
+        text(abbreviateNumber(HO.value), 950, 145);
+        text(abbreviateNumber(CO.value), 1005, 145);
+        textSize(17);
+        text("Autoclicker", 800, 170);
+        text("Wheat", 800, 250);
+        text("House", 800, 325);
+        text("Company", 800, 405);
+        textSize(8);
+        text("Another person has joined you!\nYou now have extra apple gathering power!", 800, 190);
+        text("You have learned how to cultivate other kinds of food, \nso you are now capable of supporting a larger group \nof people. You can gather even more apples than before!", 800, 265);
+        text("Your population of apple pickers has grown large \nenough to equire more permanant housing. \nYou learn how to build houses! \nYou can gather quite a lot of apples now!", 800, 340);
+        text(
+          "You and your civilization pick so many apples that you \nhave successfully created an apple juice company! \nPeople around the world come to try your apple juice! \nYou gather so many apples, you don't even know what to do with \nthem anymore! Remember, with great power comes great responsibility.",
+          800, 420);
+        fill(51);
 
-      var stage;
+      }
+    }
 
-      var projectId = 207481715;
-      var projectTitle = '';
-      var turbo = false;
-      var fullScreen = true;
-      var aspectX = 4;
-      var aspectY = 3;
-      var resolutionX = 480;
-      var resolutionY = 360;
+    function mousePressed() {
+      return false;
+    }
 
-      var params = location.search.substr(1).split('&');
-      params.forEach(function(p) {
-        var parts = p.split('=');
-        if (parts.length > 1) {
-          switch (parts[0]) {
-            case 'id':
-              projectId = Number(parts[1]);
-              break;
-            case 'turbo':
-              turbo = parts[1] !== 'false';
-              break;
-            case 'full-screen':
-              fullScreen = parts[1] !== 'false';
-              break;
-            case 'aspect-x':
-              aspectX = Number(parts[1]);
-              break;
-            case 'aspect-y':
-              aspectY = Number(parts[1]);
-              break;
-            case 'resolution-x':
-              resolutionX = Number(parts[1]);
-              break;
-            case 'resolution-y':
-              resolutionY = Number(parts[1]);
-              break;
-            default:
-              console.log('Skipping unknown option: ' + parts[0] + '=' + parts[1]);
+    function appleClicked() {
+      increment = Number(collected.value) + 1
+      collected.value = increment.toString();
+      console.log("APPLES:" + collected.value);
+    }
+
+    function dApples() {
+      applesPerS = (Number(AC.value) * 0.2) + (Number(WH.value) * 1) + (Number(HO.value) * 8) + (Number(CO.value) * 260);
+      collected.value = Number(collected.value) + Number(applesPerS);
+      console.log("Rate:" + Number(applesPerS) + "Value: " + collected.value.toString());
+    }
+
+    function ACClicked() {
+      if (collected.value >= reqAC) {
+        AC.value = Number(AC.value) + 1;
+        collected.value = collected.value - reqAC;
+      }
+      console.log("Autoclicker: " + AC.value);
+    }
+
+    function WHClicked() {
+      if (collected.value >= reqWH) {
+        WH.value = Number(WH.value) + 1;
+        collected.value = collected.value - reqWH;
+      }
+      console.log("wheat count: " + WH.value);
+    }
+
+    function HOClicked() {
+      if (collected.value >= reqHO) {
+        HO.value = Number(HO.value) + 1;
+        collected.value = collected.value - reqHO;
+      }
+      console.log("house count: " + HO.value);
+    }
+
+    function COClicked() {
+      if (collected.value >= reqHO) {
+        CO.value = Number(CO.value) + 1;
+        collected.value = collected.value - reqHO;
+      }
+      console.log("Company count: " + CO.value);
+    }
+
+    function abbreviateNumber(value) {
+      var newValue = value;
+      if (value >= 1000) {
+        var suffixes = ["", "k", "m", "b", "t"];
+        var suffixNum = Math.floor(("" + value).length / 3);
+        var shortValue = '';
+        for (var precision = 2; precision >= 1; precision--) {
+          shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
+          var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
+          if (dotLessShortValue.length <= 2) {
+            break;
           }
         }
-      });
-
-      P.resolution = resolutionX;
-
-      var splash = document.querySelector('.splash');
-      var progressBar = document.querySelector('.progress-bar');
-      var error = document.querySelector('.error');
-      var bugLink = document.querySelector('#bug-link');
-      var webGLError = document.querySelector('.webgl-error');
-      var legacyLink = document.querySelector('#legacy-link');
-      var player = document.querySelector('.player');
-
-      var stage;
-
-      function layout() {
-        if (!stage) return;
-        var w = Math.min(window.innerWidth, window.innerHeight * aspectX / aspectY);
-        if (!fullScreen) w = resolutionX;
-        var h = w * aspectY / aspectX;
-        if (!fullScreen) h = resolutionY;
-        player.style.left = (window.innerWidth - w) / 2 + 'px';
-        player.style.top = (window.innerHeight - h) / 2 + 'px';
-        stage.setZoom(w / 480, h / 360);
-        stage.draw();
+        if (shortValue % 1 != 0) shortNum = shortValue.toFixed(1);
+        newValue = shortValue + suffixes[suffixNum];
       }
-
-      function mobileFullScreen(e) {
-        if (e) e.preventDefault();
-        document.documentElement.classList.toggle('fs');
-
-        if (!e) {
-          var el = document.documentElement;
-          if (el.requestFullScreenWithKeys) {
-            el.requestFullScreenWithKeys();
-          } else if (el.webkitRequestFullScreen) {
-            el.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-          } else if (el.mozRequestFullScreen) {
-            el.mozRequestFullScreen();
-          } else {
-            console.warn('No full screen available.');
-          }
-        }
-        updateFullScreen();
-      }
-
-      function updateFullScreen() {
-        if (!stage) return;
-
-        resolutionX = !resolutionX ? 480 : resolutionX;
-        resolutionY = !resolutionY ? 360 : resolutionY;
-
-        window.scrollTo(0, 0);
-        var padding = 8;
-        var w = window.innerWidth - padding * 2;
-        var h = window.innerHeight - padding;
-        w = Math.min(w, h * resolutionX / resolutionY);
-        h = w * resolutionY / resolutionX;
-        document.body.style.width = w + 'px';
-        document.body.style.height = h + 'px';
-        document.body.style.marginLeft = (window.innerWidth - w) / 2 + 'px';
-        document.body.style.marginTop = (window.innerHeight - h + padding) / 2 + 'px';
-        stage.setZoom(w / 480, w * resolutionY / resolutionX / 360);
-      }
-
-
-      if (P.hasTouchEvents) {
-        window.addEventListener('load', function() {
-          document.getElementById('fullscreenWarning').textContent = 'On mobile browsers, use two finger tap in portrait orientation and turn to landscape orientation for full screen.';
-        });
-
-        document.addEventListener('touchstart', function(e) {
-          if (e.targetTouches.length >= 2)
-            mobileFullScreen(e);
-        });
-      }
-
-      function showError(e) {
-        error.style.display = 'table';
-        bugLink.href = 'https://github.com/mittagskogel/sulfurous/issues/new?title=' + encodeURIComponent(projectTitle || '') + '&body=' + encodeURIComponent('\n\n\nhttps://scratch.mit.edu/projects/' + projectId +
-          '\nhttps://newton.nes.aau.at/~sulfurous/#' + projectId + (e.stack ? '\n\n```\n' + e.stack + '\n```' : ''));
-        console.error(e.stack);
-      }
-
-      function showWebGLError(e) {
-        webGLError.style.display = 'table';
-        legacyLink.href = location;
-        legacyLink.href = legacyLink.href.replace('html', 'legacy/html');
-        console.error(e);
-      }
-
-      window.addEventListener('resize', layout);
-
-      if (P.hasTouchEvents) {
-        document.addEventListener('touchmove', function(e) {
-          e.preventDefault();
-        });
-      }
-
-      var request = P.IO.loadScratchr2Project(projectId);
-
-      request.onload = function(s) {
-        splash.style.display = 'none';
-
-        stage = s;
-        layout();
-
-        s.isTurbo = turbo;
-        s.start();
-        s.triggerGreenFlag();
-
-        player.appendChild(s.root);
-        s.focus();
-        s.handleError = showError;
-      };
-      request.onerror = showError;
-      request.onprogress = function(e) {
-        progressBar.style.width = (10 + e.loaded / e.total * 90) + '%';
-      };
-
-      P.IO.loadScratchr2ProjectTitle(projectId, function(title) {
-        document.title = projectTitle = title;
-      });
-
-      P.showWebGLError = showWebGLError;
-
-    }());
+      return newValue;
+    }
   </script>
+
 </body>
 
 </html>
