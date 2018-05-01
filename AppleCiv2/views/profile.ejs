@@ -61,7 +61,15 @@
       <a href="/about">About</a>&nbsp;
       <p>|</p>&nbsp;
       <a href="/logout">Log Out</a>
-
+      <!-- <form method="POST" action="/logout">
+        <input type="hidden" value="<%=apples%>" name="apple_count" id="apples" />
+        <input type="hidden" value="<%=applespers%>" name="applespers" id="applespers" />
+        <input type="hidden" value="<%=autoclicker%>" name="autoclicker" id="autoclicker" />
+        <input type="hidden" value="<%=wheat%>" name="wheat" id="wheat" />
+        <input type="hidden" value="<%=house%>" name="house" id="house" />
+        <input type="hidden" value="<%=company%>" name="company" id="company" />
+        <input type="submit" />
+      </form> -->
     </ul>
   </nav>
 
@@ -71,7 +79,8 @@
 
   <div id="buttons">
     <form action="/save" method="POST">
-      <input type="hidden" type="number" value="<%=apples%>" name="apple_count" id="apples" />
+      <input type="hidden" value="<%=apples%>" name="apple_count" id="apples" />
+      <input type="hidden" value="<%=applespers%>" name="applespers" id="applespers" />
       <input type="hidden" value="<%=autoclicker%>" name="autoclicker" id="autoclicker" />
       <input type="hidden" value="<%=wheat%>" name="wheat" id="wheat" />
       <input type="hidden" value="<%=house%>" name="house" id="house" />
@@ -112,6 +121,7 @@
       WH = document.getElementById("wheat");
       HO = document.getElementById("house");
       CO = document.getElementById("company");
+      applesPerS = document.getElementById("applespers")
       reqAC = 10;
       reqWH = 50;
       reqHO = 100;
@@ -193,7 +203,8 @@
         var col_val = Number(collected.value)
         text(abbreviateNumber(col_val.toFixed(1)), 235, 115);
         text("Apples/Sec:", 40, 155);
-        text(abbreviateNumber(applesPerS.toFixed(1)), 235, 155);
+        var pers_val = Number(applesPerS.value);
+        text(abbreviateNumber(pers_val.toFixed(1)), 235, 155);
         text("UPGRADES:", 770, 115);
         textSize(10);
         text("APPLIED: AC=            WH=            HO=            CO=            ", 760, 145);
@@ -229,9 +240,9 @@
     }
 
     function dApples() {
-      applesPerS = (Number(AC.value) * 0.2) + (Number(WH.value) * 1) + (Number(HO.value) * 8) + (Number(CO.value) * 260);
-      collected.value = Number(collected.value) + Number(applesPerS);
-      console.log("Rate:" + Number(applesPerS) + "Value: " + collected.value.toString());
+      applesPerS.value = (Number(AC.value) * 0.2) + (Number(WH.value) * 1) + (Number(HO.value) * 8) + (Number(CO.value) * 260);
+      collected.value = Number(collected.value) + Number(applesPerS.value);
+      console.log("Rate:" + Number(applesPerS.value) + "Value: " + collected.value.toString());
     }
 
     function ACClicked() {

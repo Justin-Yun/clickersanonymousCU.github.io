@@ -61,7 +61,7 @@ module.exports = function(app, passport) {
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/profile', isLoggedIn, function(req, res) {
-		var sqlQuery = "SELECT apple_count, auto_clicker, wheat, house, company from users where username = '"+req.user.username+"'"
+		var sqlQuery = "SELECT apple_count, auto_clicker, wheat, house, company, apple_per_s from users where username = '"+req.user.username+"'"
 		connection.query(sqlQuery, function(err, rows){
 			if(err){
 				console.log(err)
@@ -74,7 +74,8 @@ module.exports = function(app, passport) {
 					autoclicker: rows[0].auto_clicker,
 					wheat:rows[0].wheat,
 					house:rows[0].house,
-					company:rows[0].company
+					company:rows[0].company,
+					applespers:rows[0].apple_per_s
 				});
 			}
 		})
@@ -115,10 +116,24 @@ module.exports = function(app, passport) {
 		res.redirect('/');
 	});
 
+	app.post('/logout', function(req,res){
+		console.log("SAVE and logout CALLED with "+req.body.apple_count)
+		var sqlQuery = "update users SET apple_count = "+req.body.apple_count +", auto_clicker = "+req.body.autoclicker+", wheat = "+req.body.wheat+", house = "+req.body.house+", company = "+req.body.company+", apple_per_s ="+req.body.applespers+"  WHERE username = '"+req.user.username+"';"
+		connection.query(sqlQuery, function(err,rows){
+			if(err){
+				console.log(err)
+			}
+			else{
+				req.logout();
+				res.redirect('/');
+			}
+		})
+	})
+
 
 	app.post('/save', function(req,res){
 		console.log("SAVE CALLED with "+req.body.apple_count)
-		var sqlQuery = "update users SET apple_count = "+req.body.apple_count +", auto_clicker = "+req.body.autoclicker+", wheat = "+req.body.wheat+", house = "+req.body.house+", company = "+req.body.company+" WHERE username = '"+req.user.username+"';"
+		var sqlQuery = "update users SET apple_count = "+req.body.apple_count +", auto_clicker = "+req.body.autoclicker+", wheat = "+req.body.wheat+", house = "+req.body.house+", company = "+req.body.company+", apple_per_s ="+req.body.applespers+"  WHERE username = '"+req.user.username+"';"
 		connection.query(sqlQuery, function(err,rows){
 			if(err){
 				console.log(err)
@@ -130,7 +145,8 @@ module.exports = function(app, passport) {
 					autoclicker:req.body.autoclicker,
 					wheat:req.body.wheat,
 					house:req.body.house,
-					company:req.body.company
+					company:req.body.company,
+					applespers:req.body.applespers
 				})
 			}
 		})
